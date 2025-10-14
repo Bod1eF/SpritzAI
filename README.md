@@ -1,10 +1,11 @@
 # CruzHacks2025
 Team Members: Bodie, Luis, Paul, Judy
-Project Name: Spritz
 
-# Spritz – Affordable Alternatives to Luxury Fragrances
+Project Name: SpritzAI
 
-**Spritz** is a web application built to help users find affordable alternatives—or "dupes"—for high-end perfumes and colognes. Aimed at students, budget-conscious shoppers, and everyday consumers who love great scents without the luxury markup, the app uses AI and web scraping to deliver personalized recommendations. Users simply paste the URL of a luxury fragrance product into the app, and it returns similar-smelling, budget-friendly options along with images, detailed information, and database-generated comparisons.
+# SpritzAI – Affordable Alternatives to Luxury Fragrances
+
+**SpritzAI** is a web application built to help users find affordable alternatives—or "dupes"—for high-end perfumes and colognes. Aimed at students, budget-conscious shoppers, and everyday consumers who love great scents without the luxury markup, the app uses AI and web scraping to deliver personalized recommendations. Users simply paste the URL of a luxury fragrance product into the app, and it returns similar-smelling, budget-friendly options along with images, detailed information, and database-generated comparisons.
 
 ---
 
