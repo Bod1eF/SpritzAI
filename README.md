@@ -1,21 +1,17 @@
-# CruzHacks2025
-Team Members: Bodie, Luis, Paul, Judy
-
-Project Name: SpritzAI
+Based on a [project](https://github.com/paulleeisme06/CruzHacks2025) created for CruzHacks 2025 by Bodie, Luis, Paul, and Judy
 
 # SpritzAI – Affordable Alternatives to Luxury Fragrances
 
-**SpritzAI** is a web application built to help users find affordable alternatives—or "dupes"—for high-end perfumes and colognes. Aimed at students, budget-conscious shoppers, and everyday consumers who love great scents without the luxury markup, the app uses AI and web scraping to deliver personalized recommendations. Users simply paste the URL of a luxury fragrance product into the app, and it returns similar-smelling, budget-friendly options along with images, detailed information, and database-generated comparisons.
+**SpritzAI** is a web app built to help users find affordable alternatives—or "dupes"—for high-end perfumes and colognes. Users simply paste the URL of a luxury fragrance product into the app, and it returns similar-smelling, budget-friendly options.
 
 ---
 
 ## How It Works
 
-1. **User Input**: The user enters a URL of a high-end fragrance product.
-2. **Web Scraping**: The backend uses **Puppeteer** to scrape the product page's HTML.
-3. **Fragrance Analysis**: The HTML is sent to the **Gemini API**, which identifies the product name and classifies it into a predefined scent category (e.g., floral, woody, citrus).
-4. **Database Lookup**: The backend queries a **PostgreSQL** database (running in a Docker container) to find exact or category-based dupes.
-5. **AI-Powered Results**: If matches are found, they’re returned to the user along with product images, purchase links, and LLM-generated descriptions and comparisons.
+1. **User Input**: The user enters a URL of their desired high-end fragrance.
+2. **Exact Match Check**: The product is checked against our database of 2,000+ exact matches.
+3. **Fragrance Analysis**: If no exact match is found, key metadata is scraped from the inputted product page, parsed, and analysed with an LLM to identify the product's key notes (e.g., floral, woody, citrus) to form a scent profile.
+5. **Results**: Exact matches or up to 3 recommended fragrances with similar scent profiles are presented to the user with the category, description, and similarity score.
    
 ---
 
@@ -24,7 +20,7 @@ Project Name: SpritzAI
 ### Frontend
 - [React.js](https://reactjs.org/)
 - [React Router](https://reactrouter.com/)
-- [TailwindCSS](https://tailwindcss.com/) (for styling)
+- [TailwindCSS](https://tailwindcss.com/)
 
 ### Backend
 - [Node.js](https://nodejs.org/)
@@ -44,7 +40,7 @@ Project Name: SpritzAI
 
 ---
 
-## 🚀 Running the App
+## Running the App
 
 To run the app locally:
 
