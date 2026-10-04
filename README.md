@@ -9,7 +9,7 @@ Based on a [project](https://github.com/paulleeisme06/CruzHacks2025) created for
 ## How It Works
 
 1. **User Input**: The user enters a URL of their desired high-end fragrance.
-2. **Exact Match Check**: The product is checked against our database of 2,000+ exact matches.
+2. **Exact Match Check**: The product is checked against our database of 2,000+ exact matches (aggregated from various google sheets created by fragrence communties across the internet)
 3. **Fragrance Analysis**: If no exact match is found, key metadata is scraped from the inputted product page, parsed, and analysed with an LLM to identify the product's key notes (e.g., floral, woody, citrus) to form a scent profile.
 5. **Results**: Exact matches or up to 3 recommended fragrances with similar scent profiles are presented to the user with the category, description, and similarity score.
    
