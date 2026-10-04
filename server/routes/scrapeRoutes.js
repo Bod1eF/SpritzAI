@@ -1,4 +1,3 @@
-// backend/routes/scrapeRoutes.js
 import * as db from '../services/db.js';
 import { scrapeProductDetails,  scrapeDupe} from '../services/scraper.js';
 import { analyzeFragranceWithGemini, analyzeDupePage } from '../services/gemini.js';
