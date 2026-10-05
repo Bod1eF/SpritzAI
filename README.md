@@ -35,15 +35,6 @@ Based on a [project](https://github.com/paulleeisme06/CruzHacks2025) created for
 
 ---
 
-## Application Structure
-
-- `client/`: React frontend
-- `server/`: Node/Express backend
-- `docker/`: Docker Compose & PostgreSQL setup
-- `db/`: Database schema and dupe data
-
----
-
 ## Running the App
 
 To run the app locally:
