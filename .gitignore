@@ -16,6 +16,8 @@ Thumbs.db
 
 # Vite or build outputs
 dist/
+generated/
+dist/
 build/
 
 # IDEs
