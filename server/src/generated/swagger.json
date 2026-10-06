@@ -1,0 +1,188 @@
+{
+	"openapi": "3.0.0",
+	"components": {
+		"examples": {},
+		"headers": {},
+		"parameters": {},
+		"requestBodies": {},
+		"responses": {},
+		"schemas": {
+			"FindDupesResponse": {
+				"properties": {
+					"targetName": {
+						"type": "string"
+					},
+					"targetCategory": {
+						"type": "string"
+					},
+					"targetCopy": {
+						"type": "string"
+					},
+					"targetImage": {
+						"type": "string"
+					},
+					"targetPrice": {
+						"anyOf": [
+							{
+								"type": "string"
+							},
+							{
+								"type": "number",
+								"format": "double"
+							}
+						]
+					},
+					"dupeName": {
+						"type": "string"
+					},
+					"dupeCategory": {
+						"type": "string"
+					},
+					"dupeLink": {
+						"type": "string"
+					},
+					"dupeBrand": {
+						"type": "string"
+					},
+					"dupeCopy": {
+						"type": "string"
+					},
+					"dupeImage": {
+						"type": "string"
+					},
+					"dupePrice": {
+						"anyOf": [
+							{
+								"type": "string"
+							},
+							{
+								"type": "number",
+								"format": "double"
+							}
+						]
+					}
+				},
+				"required": [
+					"targetName",
+					"targetCategory"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"ErrorResponse": {
+				"properties": {
+					"error": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"error"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"FindDupesRequest": {
+				"properties": {
+					"url": {}
+				},
+				"type": "object",
+				"additionalProperties": false
+			}
+		},
+		"securitySchemes": {}
+	},
+	"info": {
+		"title": "fragrance-finder-backend",
+		"version": "1.0.0",
+		"description": "Express backend for fragrance dupe finder",
+		"license": {
+			"name": "ISC"
+		},
+		"contact": {
+			"name": "Bodie Feinberg"
+		}
+	},
+	"paths": {
+		"/dupe/search": {
+			"post": {
+				"operationId": "FindDupes",
+				"responses": {
+					"200": {
+						"description": "OK",
+						"content": {
+							"application/json": {
+								"schema": {
+									"anyOf": [
+										{
+											"$ref": "#/components/schemas/FindDupesResponse"
+										},
+										{
+											"$ref": "#/components/schemas/ErrorResponse"
+										}
+									]
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Invalid or missing URL",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ErrorResponse"
+								}
+							}
+						}
+					},
+					"404": {
+						"description": "Failed to scrape the URL",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ErrorResponse"
+								}
+							}
+						}
+					},
+					"422": {
+						"description": "Page does not appear to describe a fragrance",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ErrorResponse"
+								}
+							}
+						}
+					},
+					"500": {
+						"description": "Internal server error",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ErrorResponse"
+								}
+							}
+						}
+					}
+				},
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/FindDupesRequest"
+							}
+						}
+					}
+				}
+			}
+		}
+	},
+	"servers": [
+		{
+			"url": "/api/v1"
+		}
+	]
+}

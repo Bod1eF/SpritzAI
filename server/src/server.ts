@@ -1,6 +1,6 @@
-import app from './app.js';
+import app from './app.ts';
 
-const PORT = 3000;
+const PORT = 3001;
 
 app.listen(PORT, () => {
   console.log(`Server running at http://localhost:${PORT}`);

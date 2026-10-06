@@ -1,17 +1,19 @@
-export function safelyParseGeminiJson(rawText) {
+import { LLMResult } from '../types';
+
+export function safelyParseGeminiJson(rawText: string): LLMResult {
   const cleanedText = rawText
     .replace(/^.*```json/i, '')  // remove markdown start
     .replace(/```.*$/i, '')      // remove markdown end
     .replace(/^\[\d+\]\s?/gm, '') // remove `[1]` style line prefixes
     .trim();
 
-  const isValid = (obj) =>
+  const isValid = (obj: any): obj is LLMResult =>
     obj &&
     typeof obj.name === 'string' &&
     typeof obj.category === 'string' &&
     typeof obj.copy === 'string'; // price/image can be null
 
-  const tryParse = (text) => {
+  const tryParse = (text: string): LLMResult | null => {
     try {
       const parsed = JSON.parse(text);
       const obj = Array.isArray(parsed) ? parsed[0] : parsed;
@@ -35,7 +37,7 @@ export function safelyParseGeminiJson(rawText) {
   // Strategy 3: Quoted JSON string
   try {
     const doubleParsed = JSON.parse(cleanedText);
-    const obj = tryParse(doubleParsed);
+    const obj = tryParse(typeof doubleParsed === 'string' ? doubleParsed : JSON.stringify(doubleParsed));
     if (obj) return obj;
   } catch {}
 

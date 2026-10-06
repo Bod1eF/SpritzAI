@@ -1,28 +1,39 @@
 {
   "name": "fragrance-finder-backend",
   "version": "1.0.0",
-  "description": "Express backend for fragrance dupe finder using Puppeteer, Gemini API, PostgreSQL, and Swagger UI",
+  "description": "Express backend for fragrance dupe finder",
   "main": "server.js",
   "type": "module",
   "scripts": {
-    "dev": "concurrently \"npm:db\" \"nodemon server.js\"",
-    "db": "docker-compose -f ./docker/docker-compose.yml up --quiet-pull"
+    "tsoa": "tsoa spec-and-routes",
+    "dev": "npm run tsoa && tsx watch src/server.ts",
+    "build": "npm run tsoa && tsc",
+    "start": "node dist/server.js"
   },
   "dependencies": {
-    "@google/generative-ai": "^0.24.0",
+    "@google/genai": "^2.27.0",
     "cors": "^2.8.5",
     "dotenv": "^16.3.1",
-    "express": "^4.19.2",
+    "express": "^4.22.3",
     "pg": "^8.11.5",
+    "playwright": "^1.63.0",
     "puppeteer": "^22.4.1",
     "puppeteer-extra": "^3.3.6",
     "puppeteer-extra-plugin-stealth": "^2.11.1",
     "swagger-ui-express": "^4.6.3",
+    "tsoa": "^7.0.0-alpha.0",
     "yamljs": "^0.3.0"
   },
   "devDependencies": {
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.6",
+    "@types/node": "^26.6.4",
+    "@types/pg": "^8.23.1",
+    "@types/swagger-ui-express": "^4.1.8",
     "concurrently": "^8.2.0",
-    "nodemon": "^3.1.0"
+    "nodemon": "^3.1.0",
+    "tsx": "^4.23.15",
+    "typescript": "^7.0.2"
   },
   "keywords": [],
   "author": "Bodie Feinberg",

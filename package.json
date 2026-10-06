@@ -1,0 +1,23 @@
+{
+  "name": "fragrancefinder",
+  "private": true,
+  "scripts": {
+    "install:all": "npm install && npm install --prefix server && npm install --prefix app",
+
+    "db:up": "docker compose -f server/docker/docker-compose.yml up -d --wait",
+    "db:down": "docker compose -f server/docker/docker-compose.yml down",
+    "db:reset": "docker compose -f server/docker/docker-compose.yml down -v && npm run db:up",
+    "db:logs": "docker compose -f server/docker/docker-compose.yml logs -f db",
+
+    "server:dev": "npm run dev --prefix server",
+    "app:start": "npm start --prefix app",
+
+    "dev": "npm run db:up && concurrently -n server,app -c blue,green \"npm:server:dev\" \"npm:app:start\"",
+
+    "build": "npm run build --prefix server && npm run build --prefix app",
+    "start": "npm start --prefix server"
+  },
+  "devDependencies": {
+    "concurrently": "^9.0.0"
+  }
+}

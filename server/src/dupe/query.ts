@@ -1,15 +1,10 @@
-import pool from '../config/db.js';
-// export async function test() {
-//   const result = await pool.query(`SELECT COUNT(*) FROM dupe`);
-//   return Number(result.rows[0].count); // Convert from string to number
-// }
+import pool from '../db.ts';
+import { DupeResult } from './types';
 
 /**
-* Finds an exact dupe by target fragrance name.
-* @param {string} name
-* @returns {Promise<object|null>}
-*/
-export async function findExactDupe(name) {
+ * Finds an exact dupe by target fragrance name.
+ */
+export async function findExactDupe(name: string): Promise<DupeResult | null> {
   const result = await pool.query(
     `
     SELECT
@@ -28,10 +23,8 @@ export async function findExactDupe(name) {
 
 /**
 * Finds a category-based dupe if no exact match found.
-* @param {string} category
-* @returns {Promise<object|null>}
 */
-export async function findCategoryDupe(category) {
+export async function findCategoryDupe(category: string): Promise<DupeResult | null> {
   const result = await pool.query(
     `
     SELECT

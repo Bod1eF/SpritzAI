@@ -1,6 +1,6 @@
 export async function getDupe(url, setDupeResult, setApiFailed, setLoading, setSearchURL) {
   try {
-    const response = await fetch('http://localhost:3000/api/scrape', {
+    const response = await fetch('/api/v1/dupe/search', {
       method: 'POST',
       body: JSON.stringify({ url }),
       headers: {
