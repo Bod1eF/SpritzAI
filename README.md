@@ -35,39 +35,44 @@ Based on a [project](https://github.com/paulleeisme06/CruzHacks2025) created for
 
 ---
 
-## Application Structure
-
-- `client/`: React frontend
-- `server/`: Node/Express backend
-- `docker/`: Docker Compose & PostgreSQL setup
-- `db/`: Database schema and dupe data
-
----
-
 ## Running the App
 
-To run the app locally:
+**Prerequisites:** Node.js and Docker.
+
+### First-time setup
+
+1. Install dependencies for the root, server, and app:
 
 ```bash
-# Stop and remove existing volumes
-docker-compose -f ./docker/docker-compose.yml down --volumes
-
-# Start PostgreSQL DB
-npm run db
-
-# Start backend server and frontend
-npm run dev
-
-#Start frontend (make sure all required components are installed, look in json file)
-npm start
+   npm run install:all
 ```
 
-### Environment Variables (first-time setup)
-
-Create a `.env` file in the `server/` directory (`server/.env`). The backend loads it via `dotenv` at startup, so both values are required before `npm run dev` will work:
+2. Create `server/.env`. The backend loads it via `dotenv` at startup, so both values are required:
 
 ```env
-DATABASE_URL=postgresql://postgres:password@localhost:5432/fragrancefinder
-# API key for the Gemini model used to analyze fragrances (get one at https://aistudio.google.com/apikey):
-GEMINI_API_KEY=your_gemini_api_key_here
+   DATABASE_URL=postgresql://postgres:password@localhost:5432/fragrancefinder
+   # API key for the Gemini model used to analyze fragrances (get one at https://aistudio.google.com/apikey):
+   GEMINI_API_KEY=your_gemini_api_key_here
+```
+
+### Run locally
+
+From the repo root:
+
+```bash
+npm run dev
+```
+
+### Database
+
+```bash
+npm run db:reset  
+npm run db:down   
+```
+
+### Production build
+
+```bash
+npm run build
+npm start          # serves the compiled backend from server/dist
 ```
