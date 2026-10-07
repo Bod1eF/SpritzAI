@@ -1,19 +1,19 @@
-import { LLMResult } from '../types';
+import { TargetAnalysis } from '../types';
 
-export function safelyParseGeminiJson(rawText: string): LLMResult {
+export function safelyParseGeminiJson(rawText: string): TargetAnalysis {
   const cleanedText = rawText
     .replace(/^.*```json/i, '')  // remove markdown start
     .replace(/```.*$/i, '')      // remove markdown end
     .replace(/^\[\d+\]\s?/gm, '') // remove `[1]` style line prefixes
     .trim();
 
-  const isValid = (obj: any): obj is LLMResult =>
+  const isValid = (obj: any): obj is TargetAnalysis =>
     obj &&
     typeof obj.name === 'string' &&
     typeof obj.category === 'string' &&
     typeof obj.copy === 'string'; // price/image can be null
 
-  const tryParse = (text: string): LLMResult | null => {
+  const tryParse = (text: string): TargetAnalysis | null => {
     try {
       const parsed = JSON.parse(text);
       const obj = Array.isArray(parsed) ? parsed[0] : parsed;

@@ -1,17 +1,17 @@
 import pool from '../db.ts';
-import { DupeResult } from './types';
+import { Dupe } from './types';
 
 /**
  * Finds an exact dupe by target fragrance name.
  */
-export async function findExactDupe(name: string): Promise<DupeResult | null> {
+export async function findExactDupe(name: string): Promise<Dupe | null> {
   const result = await pool.query(
     `
     SELECT
-      data->>'dupe' AS dupe,
+      data->>'dupe' AS name,
       data->>'category' AS category,
-      data->>'dupelink' AS dupelink,
-      data->>'dupebrand' AS dupebrand
+      data->>'dupelink' AS link,
+      data->>'dupebrand' AS brand
     FROM dupe
     WHERE LOWER(data->>'target') = LOWER($1)
     LIMIT 1
@@ -24,14 +24,14 @@ export async function findExactDupe(name: string): Promise<DupeResult | null> {
 /**
 * Finds a category-based dupe if no exact match found.
 */
-export async function findCategoryDupe(category: string): Promise<DupeResult | null> {
+export async function findCategoryDupe(category: string): Promise<Dupe | null> {
   const result = await pool.query(
     `
     SELECT
-      data->>'dupe' AS dupe,
+      data->>'dupe' AS name,
       data->>'category' AS category,
-      data->>'dupelink' AS dupelink,
-      data->>'dupebrand' AS dupebrand
+      data->>'dupelink' AS link,
+      data->>'dupebrand' AS brand
     FROM dupe
     WHERE LOWER(data->>'category') = LOWER($1)
     ORDER BY

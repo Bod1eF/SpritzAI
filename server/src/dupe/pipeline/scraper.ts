@@ -1,9 +1,8 @@
 import { getBrowser, USER_AGENT, BLOCKED_RESOURCES } from './browser';
-import { ProductDetails, DupePage, ScrapedPage } from '../types';
-// types.ts: add `structured: boolean` to ScrapedPage (and to ProductDetails if you want callers to see it)
+import { ProductDetails, ProductPage } from '../types';
 
 // Runs inside the page, so it must be self-contained (no outer-scope references).
-function extractFromPage(): ScrapedPage {
+function extractFromPage(): ProductPage {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   type LD = Record<string, any>;
 
@@ -95,7 +94,7 @@ function extractFromPage(): ScrapedPage {
   const paragraphs = [...root.querySelectorAll('p')]
     .map((p) => p.innerText.trim())
     .filter((t) => t.length > 80);
-  const description = [...new Set([summary, ...paragraphs].filter(Boolean))]
+  const text = [...new Set([summary, ...paragraphs].filter(Boolean))]
     .join('\n\n')
     .slice(0, 1500);
 
@@ -124,14 +123,13 @@ function extractFromPage(): ScrapedPage {
   return {
     name,
     image,
-    description,
+    text,
     price,
-    text: root.innerText.slice(0, 8000),
     structured: candidates.length > 0, // lets the caller decide whether the LLM fallback is needed
   };
 }
 
-async function scrapePage(url: string): Promise<ScrapedPage> {
+async function scrapePage(url: string): Promise<ProductPage> {
   const browser = await getBrowser();
   const context = await browser.newContext({
     userAgent: USER_AGENT,
@@ -171,12 +169,7 @@ async function scrapePage(url: string): Promise<ScrapedPage> {
   }
 }
 
-export async function scrapeDupe(url: string): Promise<DupePage> {
-  const { text, image } = await scrapePage(url);
-  return { text, image };
-}
-
 export async function scrapeProductDetails(url: string): Promise<ProductDetails> {
-  const { name, image, description, price, structured } = await scrapePage(url);
-  return { name, image, description, price, structured };
+  const { name, image, text, price } = await scrapePage(url);
+  return { name, image, text, price };
 }
