@@ -1,6 +1,6 @@
 import { findExactDupe, findCategoryDupe } from './query.ts';
 import { scrapeProductDetails } from './pipeline/scraper.ts';
-import { analyzeFragranceWithGemini, analyzeDupePage } from './pipeline/gemini.ts';
+import { analyzeFragranceWithGemini, analyzeDupePage } from './pipeline/analyze.ts';
 import {
   Dupe,
   DupeAnalysis,
